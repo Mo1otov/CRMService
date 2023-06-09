@@ -3,142 +3,226 @@ package cn.edu.cqut.crmservice.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
-import org.springframework.format.annotation.DateTimeFormat;
-
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author CQUT
- * @since 2023-06-08
+ * @since 2023-06-09
  */
 public class Services implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  @Serial private static final long serialVersionUID = 1L;
 
-    /**
-     * 服务编号
-     */
-    @TableId(value = "ser_id", type = IdType.AUTO)
-    private Integer serId;
+  /** 服务编号 */
+  @TableId(value = "ser_id", type = IdType.AUTO)
+  private Integer serId;
 
-    /**
-     * 服务类型：咨询、投诉、建议
-     */
-    private String serType;
+  /** 服务类型：咨询、投诉、建议 */
+  private String serType;
 
-    /**
-     * 服务概要
-     */
-    private String serSummary;
+  /** 服务概要 */
+  private String serSummary;
 
-    /**
-     * 服务详细要求
-     */
-    private String serDetail;
+  /** 服务详细要求 */
+  private String serDetail;
 
-    /**
-     * 客户编号
-     */
-    private Integer cusId;
+  /** 客户编号 */
+  private Integer cusId;
 
-    /**
-     * 服务创建人：当前登录用户
-     */
-    private String serCreator;
+  /** 服务创建人：当前登录用户 */
+  private String serCreator;
 
-    /**
-     * 服务创建时间：当前系统时间
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private LocalDateTime serCreateTime;
+  /** 服务创建时间：当前系统时间 */
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  private LocalDateTime serCreateTime;
 
-    /**
-     * 服务状态：新创建、已分配、已处理、已归档
-     */
-    private String serState;
+  /** 服务状态：新创建、已分配、已处理、已归档 */
+  private String serState;
 
-    public Integer getSerId() {
-        return serId;
-    }
+  /** 服务分配时间 */
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  private LocalDateTime serAllocTime;
 
-    public void setSerId(Integer serId) {
-        this.serId = serId;
-    }
+  /** 处理人 */
+  private String serHandler;
 
-    public String getSerType() {
-        return serType;
-    }
+  /** 服务处理方法 */
+  private String serProcessMethod;
 
-    public void setSerType(String serType) {
-        this.serType = serType;
-    }
+  /** 服务处理时间 */
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  private LocalDateTime serProcessTime;
 
-    public String getSerSummary() {
-        return serSummary;
-    }
+  /** 客户反馈 */
+  private String serCusFeedback;
 
-    public void setSerSummary(String serSummary) {
-        this.serSummary = serSummary;
-    }
+  /** 客户满意度:1,2,3,4,5 */
+  private Integer serCusRate;
 
-    public String getSerDetail() {
-        return serDetail;
-    }
+  /** 客户反馈时间 */
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+  private LocalDateTime serFeedbackTime;
 
-    public void setSerDetail(String serDetail) {
-        this.serDetail = serDetail;
-    }
+  public Integer getSerId() {
+    return serId;
+  }
 
-    public Integer getCusId() {
-        return cusId;
-    }
+  public void setSerId(Integer serId) {
+    this.serId = serId;
+  }
 
-    public void setCusId(Integer cusId) {
-        this.cusId = cusId;
-    }
+  public String getSerType() {
+    return serType;
+  }
 
-    public String getSerCreator() {
-        return serCreator;
-    }
+  public void setSerType(String serType) {
+    this.serType = serType;
+  }
 
-    public void setSerCreator(String serCreator) {
-        this.serCreator = serCreator;
-    }
+  public String getSerSummary() {
+    return serSummary;
+  }
 
-    public LocalDateTime getSerCreateTime() {
-        return serCreateTime;
-    }
+  public void setSerSummary(String serSummary) {
+    this.serSummary = serSummary;
+  }
 
-    public void setSerCreateTime(LocalDateTime serCreateTime) {
-        this.serCreateTime = serCreateTime;
-    }
+  public String getSerDetail() {
+    return serDetail;
+  }
 
-    public String getSerState() {
-        return serState;
-    }
+  public void setSerDetail(String serDetail) {
+    this.serDetail = serDetail;
+  }
 
-    public void setSerState(String serState) {
-        this.serState = serState;
-    }
+  public Integer getCusId() {
+    return cusId;
+  }
 
-    @Override
-    public String toString() {
-        return "Services{" +
-        "serId = " + serId +
-        ", serType = " + serType +
-        ", serSummary = " + serSummary +
-        ", serDetail = " + serDetail +
-        ", cusId = " + cusId +
-        ", serCreator = " + serCreator +
-        ", serCreateTime = " + serCreateTime +
-        ", serState = " + serState +
-        "}";
-    }
+  public void setCusId(Integer cusId) {
+    this.cusId = cusId;
+  }
+
+  public String getSerCreator() {
+    return serCreator;
+  }
+
+  public void setSerCreator(String serCreator) {
+    this.serCreator = serCreator;
+  }
+
+  public LocalDateTime getSerCreateTime() {
+    return serCreateTime;
+  }
+
+  public void setSerCreateTime(LocalDateTime serCreateTime) {
+    this.serCreateTime = serCreateTime;
+  }
+
+  public String getSerState() {
+    return serState;
+  }
+
+  public void setSerState(String serState) {
+    this.serState = serState;
+  }
+
+  public LocalDateTime getSerAllocTime() {
+    return serAllocTime;
+  }
+
+  public void setSerAllocTime(LocalDateTime serAllocTime) {
+    this.serAllocTime = serAllocTime;
+  }
+
+  public String getSerHandler() {
+    return serHandler;
+  }
+
+  public void setSerHandler(String serHandler) {
+    this.serHandler = serHandler;
+  }
+
+  public String getSerProcessMethod() {
+    return serProcessMethod;
+  }
+
+  public void setSerProcessMethod(String serProcessMethod) {
+    this.serProcessMethod = serProcessMethod;
+  }
+
+  public LocalDateTime getSerProcessTime() {
+    return serProcessTime;
+  }
+
+  public void setSerProcessTime(LocalDateTime serProcessTime) {
+    this.serProcessTime = serProcessTime;
+  }
+
+  public String getSerCusFeedback() {
+    return serCusFeedback;
+  }
+
+  public void setSerCusFeedback(String serCusFeedback) {
+    this.serCusFeedback = serCusFeedback;
+  }
+
+  public Integer getSerCusRate() {
+    return serCusRate;
+  }
+
+  public void setSerCusRate(Integer serCusRate) {
+    this.serCusRate = serCusRate;
+  }
+
+  public LocalDateTime getSerFeedbackTime() {
+    return serFeedbackTime;
+  }
+
+  public void setSerFeedbackTime(LocalDateTime serFeedbackTime) {
+    this.serFeedbackTime = serFeedbackTime;
+  }
+
+  @Override
+  public String toString() {
+    return "Services{"
+        + "serId = "
+        + serId
+        + ", serType = "
+        + serType
+        + ", serSummary = "
+        + serSummary
+        + ", serDetail = "
+        + serDetail
+        + ", cusId = "
+        + cusId
+        + ", serCreator = "
+        + serCreator
+        + ", serCreateTime = "
+        + serCreateTime
+        + ", serState = "
+        + serState
+        + ", serAllocTime = "
+        + serAllocTime
+        + ", serHandler = "
+        + serHandler
+        + ", serProcessMethod = "
+        + serProcessMethod
+        + ", serProcessTime = "
+        + serProcessTime
+        + ", serCusFeedback = "
+        + serCusFeedback
+        + ", serCusRate = "
+        + serCusRate
+        + ", serFeedbackTime = "
+        + serFeedbackTime
+        + "}";
+  }
 }

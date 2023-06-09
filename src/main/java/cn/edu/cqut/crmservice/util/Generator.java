@@ -24,7 +24,7 @@ public class Generator {
         .strategyConfig(
             builder -> {
               builder
-                  .addInclude("business_record"); // 设置需要生成的表名
+                  .addInclude("services"); // 设置需要生成的表名
             })
         .execute();
   }
