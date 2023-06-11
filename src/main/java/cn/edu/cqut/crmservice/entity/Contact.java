@@ -1,16 +1,13 @@
 package cn.edu.cqut.crmservice.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * <p>
- * 
- * </p>
- *
  * @author CQUT
  * @since 2023-06-08
  */
@@ -59,6 +56,17 @@ public class Contact implements Serializable {
      * 客户编号
      */
     private Integer cusId;
+
+    @TableField(exist = false)
+    private Customer customer;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public Integer getConId() {
         return conId;
@@ -126,15 +134,6 @@ public class Contact implements Serializable {
 
     @Override
     public String toString() {
-        return "Contact{" +
-        "conId = " + conId +
-        ", conName = " + conName +
-        ", conGender = " + conGender +
-        ", conJob = " + conJob +
-        ", conTel = " + conTel +
-        ", conPhone = " + conPhone +
-        ", conDesc = " + conDesc +
-        ", cusId = " + cusId +
-        "}";
+        return "Contact{" + "conId = " + conId + ", conName = " + conName + ", conGender = " + conGender + ", conJob = " + conJob + ", conTel = " + conTel + ", conPhone = " + conPhone + ", conDesc = " + conDesc + ", cusId = " + cusId + ", customer =" + customer + "}";
     }
 }

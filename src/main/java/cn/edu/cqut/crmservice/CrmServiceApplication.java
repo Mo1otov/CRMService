@@ -7,18 +7,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * @author mxw
+ */
 @SpringBootApplication
 @MapperScan("cn.edu.cqut.crmservice.mapper") // 指定mapper接口的包名
 public class CrmServiceApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(CrmServiceApplication.class, args);
-  }
-  //分页插件配置
-  @Bean
-  public MybatisPlusInterceptor mybatisPlusInterceptor(){
-    MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-    interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
-    return interceptor;
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(CrmServiceApplication.class, args);
+    }
+    // 分页插件配置
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        return interceptor;
+    }
 }

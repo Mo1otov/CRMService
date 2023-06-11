@@ -15,20 +15,30 @@ public class TableResult<T> {
   private long count;
   // 当前页面要显示的数据
   private List<T> data;
+  // 实体对象
+  private T obj;
 
-  public TableResult(int code, String msg, long count, List<T> data) {
+  public TableResult(int code, String msg, long count, List<T> data, T obj) {
     this.code = code;
     this.msg = msg;
     this.count = count;
     this.data = data;
+    this.obj = obj;
   }
 
   public static <T> TableResult<T> ok(String msg, long count, List<T> data) {
-    return new TableResult<T>(0, msg, count, data);
+    return new TableResult<T>(0, msg, count, data, null);
+  }
+  public static <T> TableResult<T> ok(String msg) {
+    return new TableResult<T>(0, msg, 0, null, null);
   }
 
-  public static <T> TableResult<T> ok(String msg) {
-    return new TableResult<T>(0, msg,0,null);
+  public static <T> TableResult<T> ok(String msg, T obj) {
+    return new TableResult<T>(0, msg, 0, null, obj);
+  }
+
+  public static <T> TableResult<T> error(int code, String msg) {
+    return new TableResult<T>(1, msg, code, null, null);
   }
 
   public int getCode() {
@@ -61,5 +71,13 @@ public class TableResult<T> {
 
   public void setData(List<T> data) {
     this.data = data;
+  }
+
+  public T getObj() {
+    return obj;
+  }
+
+  public void setObj(T obj) {
+    this.obj = obj;
   }
 }

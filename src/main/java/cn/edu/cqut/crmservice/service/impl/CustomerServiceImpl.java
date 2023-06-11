@@ -1,10 +1,13 @@
 package cn.edu.cqut.crmservice.service.impl;
 
 import cn.edu.cqut.crmservice.entity.Customer;
+import cn.edu.cqut.crmservice.entity.StatisticalReport;
 import cn.edu.cqut.crmservice.mapper.CustomerMapper;
 import cn.edu.cqut.crmservice.service.ICustomerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +19,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> implements ICustomerService {
-
+    @Override
+    public List<StatisticalReport> getCustomerCountByRegion() {
+        return baseMapper.getCustomerCountByRegion();
+    }
 }
