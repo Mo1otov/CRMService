@@ -1,6 +1,8 @@
 package cn.edu.cqut.crmservice.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serial;
@@ -41,6 +43,7 @@ public class Services implements Serializable {
   private LocalDateTime serCreateTime;
 
   /** 服务状态：新创建、已分配、已处理、已归档 */
+  @TableField(updateStrategy = FieldStrategy.IGNORED)
   private String serState;
 
   /** 服务分配时间 */
@@ -49,6 +52,7 @@ public class Services implements Serializable {
   private LocalDateTime serAllocTime;
 
   /** 处理人 */
+  @TableField(updateStrategy = FieldStrategy.IGNORED)
   private String serHandler;
 
   /** 服务处理方法 */
@@ -56,6 +60,7 @@ public class Services implements Serializable {
 
   /** 服务处理时间 */
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+  @TableField(updateStrategy = FieldStrategy.IGNORED)//解决MyBatisPlus不能传递null的localDateTIme
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
   private LocalDateTime serProcessTime;
 

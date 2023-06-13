@@ -6,11 +6,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author mxw
  */
 @SpringBootApplication
+@EnableScheduling//启用定时任务
 @MapperScan("cn.edu.cqut.crmservice.mapper") // 指定mapper接口的包名
 public class CrmServiceApplication {
 

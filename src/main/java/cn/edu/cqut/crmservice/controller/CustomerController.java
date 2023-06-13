@@ -8,6 +8,7 @@ import cn.edu.cqut.crmservice.util.TableResult;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -65,4 +66,9 @@ public class CustomerController {
         customerService.removeByIds(Arrays.asList(ids)); // asList方法把数组转成list
         return TableResult.ok("删除客户信息成功");
     }
+
+//    @Scheduled(cron = "0/5 * * * * *")//每晚两点执行
+//    public void job(){
+//        System.out.println("================================"+ System.currentTimeMillis());
+//    }
 }

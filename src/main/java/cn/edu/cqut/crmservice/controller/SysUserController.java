@@ -47,7 +47,6 @@ public class SysUserController {
         wrapper.eq("su_role", "SALES"); // 第一个参数是字段名
         // wrapper.or().eq() ，wrapper默认是and 需要eq前用or才能使用sql的or
         List<SysUser> userList = sysUserService.list(wrapper);
-        System.out.println(userList);
         // getTotal()方法返回表里的总记录数,getRecords()方法返回当前页的数据列表
         return TableResult.ok("查询成功",userList.size(),userList);
     }

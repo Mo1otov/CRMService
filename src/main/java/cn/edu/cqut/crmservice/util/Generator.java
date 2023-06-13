@@ -22,7 +22,7 @@ public class Generator {
             })
         .strategyConfig(
             builder -> {
-              builder.addInclude("sys_user"); // 设置需要生成的表名
+              builder.addInclude("customer_loss"); // 设置需要生成的表名
             })
         .execute();
   }
