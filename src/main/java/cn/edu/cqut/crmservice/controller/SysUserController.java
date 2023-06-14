@@ -3,6 +3,7 @@ package cn.edu.cqut.crmservice.controller;
 import cn.edu.cqut.crmservice.entity.Contact;
 import cn.edu.cqut.crmservice.entity.SysUser;
 import cn.edu.cqut.crmservice.service.ISysUserService;
+import cn.edu.cqut.crmservice.util.Auth;
 import cn.edu.cqut.crmservice.util.JWTUtil;
 import cn.edu.cqut.crmservice.util.TableResult;
 
@@ -41,6 +42,7 @@ public class SysUserController {
     }
 
     @GetMapping("/getSalesList")
+    @Auth(roles = "SUPERVISOR")
     public TableResult<SysUser> getSaleList() {
         // 条件查询
         QueryWrapper<SysUser> wrapper = new QueryWrapper<>();

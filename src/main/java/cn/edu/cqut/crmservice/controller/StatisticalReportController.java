@@ -2,6 +2,7 @@ package cn.edu.cqut.crmservice.controller;
 
 import cn.edu.cqut.crmservice.entity.StatisticalReport;
 import cn.edu.cqut.crmservice.service.ICustomerService;
+import cn.edu.cqut.crmservice.util.Auth;
 import cn.edu.cqut.crmservice.util.StatisticalReportResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class StatisticalReportController {
     @Autowired
     private ICustomerService customerService;
     @GetMapping("/getCustomerCountByRegion")
+    @Auth(roles = "SUPERVISOR")
     public StatisticalReportResult getCustomerCountByRegion (){
         List<StatisticalReport> statisticalReports = customerService.getCustomerCountByRegion();
         List<String> items = new ArrayList<>();

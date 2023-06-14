@@ -1,10 +1,12 @@
 package cn.edu.cqut.crmservice.controller;
 
 import cn.edu.cqut.crmservice.entity.Customer;
+import cn.edu.cqut.crmservice.entity.SysUser;
 import cn.edu.cqut.crmservice.service.ICustomerService;
 import cn.edu.cqut.crmservice.util.Auth;
 import cn.edu.cqut.crmservice.util.TableResult;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,10 +43,17 @@ public class CustomerController {
         System.out.println(request.getAttribute("suId"));
         System.out.println(request.getAttribute("suName"));
         System.out.println(request.getAttribute("suRole"));
-        Page<Customer> customerPage = new Page<>(page, limit);
-        Page<Customer> page1 = customerService.page(customerPage); // 调用service层的page方法,返回分页
-        // getTotal()方法返回表里的总记录数,getRecords()方法返回当前页的数据列表
-        return TableResult.ok("查询成功", page1.getTotal(), page1.getRecords());
+        if (limit == null && page == null) {
+            List<Customer> customerList = customerService.list();
+            // getTotal()方法返回表里的总记录数,getRecords()方法返回当前页的数据列表
+            return TableResult.ok("查询成功",customerList.size(),customerList);
+
+        } else {
+            Page<Customer> customerPage = new Page<>(page, limit);
+            Page<Customer> page1 = customerService.page(customerPage); // 调用service层的page方法,返回分页
+            // getTotal()方法返回表里的总记录数,getRecords()方法返回当前页的数据列表
+            return TableResult.ok("查询成功", page1.getTotal(), page1.getRecords());
+        }
     }
 
     @Auth(roles = "SALES")

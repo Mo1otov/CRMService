@@ -2,6 +2,7 @@ package cn.edu.cqut.crmservice.controller;
 
 import cn.edu.cqut.crmservice.entity.Contact;
 import cn.edu.cqut.crmservice.service.IContactService;
+import cn.edu.cqut.crmservice.util.Auth;
 import cn.edu.cqut.crmservice.util.TableResult;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -30,6 +31,7 @@ public class ContactController {
      * @return TableResult
      */
     @GetMapping("/getContactList")
+    @Auth(roles = "SALES")
     public TableResult<Contact> getContactList(Integer limit, Integer page, Contact contact) {
         QueryWrapper<Contact> wrapper = new QueryWrapper<>();
         if (contact.getCusId() == null) {
@@ -50,18 +52,21 @@ public class ContactController {
     }
 
     @PostMapping("/updateContact")
+    @Auth(roles = "SALES")
     public TableResult<Contact> updateContact(Contact contact) {
         contactService.updateById(contact);
         return TableResult.ok("修改联系人信息成功");
     }
 
     @PostMapping("/addContact")
+    @Auth(roles = "SALES")
     public TableResult<Contact> addContact(Contact contact) {
         contactService.save(contact);
         return TableResult.ok("新增联系人信息成功");
     }
 
     @PostMapping("/deleteContact")
+    @Auth(roles = "SALES")
     public TableResult<Contact> deleteContact(Integer[] ids) {//参数名要和前端ajax方法中data参数的属性名要一致
         contactService.removeByIds(Arrays.asList(ids));//asList方法把数组转成list
         return TableResult.ok("删除联系人信息成功");

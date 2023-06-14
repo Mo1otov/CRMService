@@ -2,6 +2,7 @@ package cn.edu.cqut.crmservice.controller;
 
 import cn.edu.cqut.crmservice.entity.BusinessRecord;
 import cn.edu.cqut.crmservice.service.IBusinessRecordService;
+import cn.edu.cqut.crmservice.util.Auth;
 import cn.edu.cqut.crmservice.util.TableResult;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -32,6 +33,7 @@ public class BusinessRecordController {
      * @return TableResult
      */
     @GetMapping("/getBusinessRecordList")
+    @Auth(roles = "SALES")
     public TableResult<BusinessRecord> getBusinessRecordList(Integer limit, Integer page, BusinessRecord businessRecord) {
         if (businessRecord.getCusId() == null) {
             Page<BusinessRecord> businessRecordPage = new Page<>(page, limit);
@@ -52,18 +54,21 @@ public class BusinessRecordController {
     }
 
     @PostMapping("/updateBusinessRecord")
+    @Auth(roles = "SALES")
     public TableResult<BusinessRecord> updateBusinessRecord(BusinessRecord businessRecord){
         businessRecordService.updateById(businessRecord);
         return TableResult.ok("修改联系人信息成功");
     }
 
     @PostMapping("/addBusinessRecord")
+    @Auth(roles = "SALES")
     public TableResult<BusinessRecord> addBusinessRecord(BusinessRecord businessRecord){
         businessRecordService.save(businessRecord);
         return TableResult.ok("新增联系人信息成功");
     }
 
     @PostMapping("/deleteBusinessRecord")
+    @Auth(roles = "SALES")
     public TableResult<BusinessRecord> deleteBusinessRecord(Integer[] ids){//参数名要和前端ajax方法中data参数的属性名要一致
         businessRecordService.removeByIds(Arrays.asList(ids));//asList方法把数组转成list
         return TableResult.ok("删除联系人信息成功");
