@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface Auth {
     boolean value() default true;
 
-    String roles() default "ADMIN";
+    String[] roles() default "ADMIN";
 }

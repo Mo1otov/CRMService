@@ -3,6 +3,7 @@ package cn.edu.cqut.crmservice.util;
 import com.alibaba.fastjson.JSON;
 import io.jsonwebtoken.Claims;
 import java.lang.reflect.Method;
+import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,15 @@ public class AuthInterceptor implements HandlerInterceptor {
                 String suId = (String) result.getObj().get("suId");
                 String suRole = (String) result.getObj().get("suRole");
                 String suName = (String) result.getObj().get("suName");
-
+                boolean isValid = false;
+                for(int i = 0;i<auth.roles().length;i++){
+                    if (Objects.equals(auth.roles()[i], suRole)) {
+                        isValid = true;
+                        break;
+                    }
+                }
                 // 没有权限
-                if (!auth.roles().contains(suRole)) {
+                if (!isValid) {
                     httpServletResponse.setCharacterEncoding("UTF-8");
                     httpServletResponse.setContentType("application/json; charset=utf-8");
                     String respStr = JSON.toJSONString(TableResult.error(3, "没有权限"));

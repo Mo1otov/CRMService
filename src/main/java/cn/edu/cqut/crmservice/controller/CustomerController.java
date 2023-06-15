@@ -37,7 +37,7 @@ public class CustomerController {
      * @return TableResult
      */
     @GetMapping("/getCustomerList")
-    @Auth(roles = "SALES")
+    @Auth(roles = {"SALES","SUPERVISOR"})
     public TableResult<Customer> getCustomerList(
             Integer limit, Integer page, HttpServletRequest request) {
         System.out.println(request.getAttribute("suId"));

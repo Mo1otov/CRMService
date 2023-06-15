@@ -33,7 +33,7 @@ public class ServicesController {
      * @return TableResult
      */
     @GetMapping("/getServiceList")
-    @Auth(roles = "SALES")
+    @Auth(roles = {"SALES","SUPERVISOR"})
     public TableResult<Services> getServicesList(Integer limit, Integer page) {
         Page<Services> servicesPage = new Page<>(page, limit);
         Page<Services> page1 = servicesService.page(servicesPage); // 调用service层的page方法,返回分页
@@ -123,7 +123,7 @@ public class ServicesController {
     }
 
     @PostMapping("/addService")
-    @Auth(roles = "SALES")
+    @Auth(roles = {"SALES","SUPERVISOR"})
     public TableResult<Services> addService(Services service) {
         service.setSerState("新创建");
         servicesService.save(service);
